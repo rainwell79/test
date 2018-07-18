@@ -1,0 +1,64 @@
+<!DOCTYPE html >
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=no, target-densityDpi=medium-dpi" />
+<title>인스타그램 토큰 재발급</title>
+<link rel="stylesheet" href="common.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+<style>
+.contents {width:1000px; margin:0 auto; padding:30px 0 0;}
+.chk-list li {position:relative; margin:0 0 15px; padding:0 0 0 200px; font-size:16px; letter-spacing:-0.03em; line-height:1.4em;}
+.chk-list h3 {position:absolute; left:0; top:0; font-size:1em;}
+.chk-list input {width:100%; height:34px; padding:4px 10px; font-size:1em; border:1px solid #ccc; outline:0 none; border-radius:3px;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	-webkit-transition:300ms;
+	-moz-transition:300ms;
+	-o-transition:300ms;
+	transition:300ms;
+}
+.chk-list input:focus {border-color:#9b8ce6; box-shadow:0 0 3px rgba(155,140,230,0.3);}
+.chk-list button {display:inline-block; margin:0; padding:8px 30px; color:#fff; font-size:1em; border:1px solid #333; background:#333;}
+</style>
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="contents">
+			<ul class="chk-list">
+				<li>
+					<h3><label for="insta_id">인스타그램 Client ID</label></h3>
+					<input type="text" id="insta_id">
+				<li>
+				<li>
+					<h3><label for="insta_uri">Valid redirect URIs</label></h3>
+					<input type="text" id="insta_uri">
+				<li>
+				<li class="last"><button type="button" id="insta_chk">재발급 사이트로 이동</button><li>
+			</ul>
+
+		</div>
+	</div>
+</body>
+
+<script>
+document.getElementById('insta_chk').addEventListener('click', function(){
+	var _id = document.getElementById('insta_id');
+	var _uri = document.getElementById('insta_uri');
+	if(!_id.value){
+		alert('Client ID를 입력하세요.');
+		_id.focus();
+		return;
+	}
+	if(!_uri.value){
+		alert('Client ID를 입력하세요.');
+		_uri.focus();
+		return;
+	}
+	window.open('https://api.instagram.com/oauth/authorize/?client_id='+_id.value+'&redirect_uri='+_uri.value+'&response_type=token', '_blank');
+});
+</script>
+</html>
